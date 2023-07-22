@@ -1,0 +1,29 @@
+<h1>Editing Book</h1>
+<div class="container">
+    <% if @book.errors.any? %>
+        <% if @book.errors.count <= 1 %>
+            <%= @book.errors.count %> error prohibited this obj from being saved:
+        <% elsif @book.errors.count <= 2 %> 
+            <%= @book.errors.count %> errors prohibited this obj from being saved:
+        <% end %>
+            <ul style="list-style: none">
+                <% @book.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+    <% end %>
+    <%= form_with model: @book do |f| %>
+        <label for="inputTile">Title</label>
+        <br>
+        <%= f.text_field :title, autofocus: true, id:"inputTitle" %>
+        <br>
+        <label for="InputBody">Opinion</label>
+        <br>
+        <%= f.text_area :body, autofocus: true, id:"inputBody" %>
+        <br>
+        <%= f.submit "Update Book", class:"btn btn-success" %>
+    <% end %>
+    <%= link_to "Show", book_path(@book.id) %>
+    <span>|</span>
+    <%= link_to "Back", books_path %>
+</div>
